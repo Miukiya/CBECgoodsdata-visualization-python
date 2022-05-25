@@ -19,7 +19,7 @@
 
 从国家民政部官网中能够查到国内最新的省市区县数据，将这些数据拷贝到excel 中，并插入数据库；然后导入 jieba 分词库来对地址字符串做分词；最后编写Python 脚本将所有的关键词依次同（省）市、县两级数据进行比较和匹配，提取地级行政区。  
 ### 三、方法步骤
-1、导入全国行政区域字典数据  
+#### 	1、导入全国行政区域字典数据  
 
 ​		从国家民政部官网中将国家行政区划数据导入excel，按省、市、区录入  
 ![image](https://user-images.githubusercontent.com/48922159/170196204-a25a4195-1f58-4f9f-a50a-050cacd83605.png)
@@ -30,16 +30,16 @@
 
 ​		基于china_ad_division表整理出市级字典、县级字典  
 ![image](https://user-images.githubusercontent.com/48922159/170196536-d80ff403-cada-46a1-b40a-8687b17cd3c7.png)
-2、相关库准备  
+#### 	2、相关库准备  
 
-2.1 下载jieba分词库  
+##### 	2.1 下载jieba分词库  
 ![image](https://user-images.githubusercontent.com/48922159/170197605-e748870f-b791-416d-9b98-7b60717fe06a.png)
-2.2 配置mysql  
+##### 	2.2 配置mysql  
 ​		安装MySQLdb，我的Python版本是3.10，所以mysqlclient是2.1.0版本  
 ![image](https://user-images.githubusercontent.com/48922159/170197815-c286036c-e0c6-4344-96bb-a70b79aa22d1.png)
-3、编写Python脚本  
+#### 	3、编写Python脚本  
 
-3.1 sql工具类  
+##### 	3.1 sql工具类  
 
 ​		引入MySQLdb，在该类里实现连接数据库、查询数据、提交数据处理等功能  
 ```
@@ -104,7 +104,7 @@ class Mysqldb(object):
 # 生成实例
 myOperationdb = Mysqldb()
 ```
-3.2 地级市字段匹配的类
+##### 	3.2 地级市字段匹配的类
 
 ​		该类实现用地址分词字符串匹配行政区划字典，并返回地级市名的功能。
 
@@ -161,7 +161,7 @@ def address_match(address):
     address_item = city_item
     return address_item
 ```
-#### 	3.3 执行脚本
+##### 	3.3 执行脚本
 
 ​		写一个执行文件，传入实参执行上面两个工具类，并更新数据库字段值
 ```
