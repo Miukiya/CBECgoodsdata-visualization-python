@@ -35,6 +35,7 @@
 ![image](https://user-images.githubusercontent.com/48922159/170197605-e748870f-b791-416d-9b98-7b60717fe06a.png)  
 ##### 	2.2 配置mysql  
 >安装MySQLdb，我的Python版本是3.10，所以mysqlclient是2.1.0版本  
+  
 ![image](https://user-images.githubusercontent.com/48922159/170197815-c286036c-e0c6-4344-96bb-a70b79aa22d1.png)  
 #### 	3、编写Python脚本  
 
@@ -104,8 +105,7 @@ class Mysqldb(object):
 myOperationdb = Mysqldb()
 ```
 ##### 	3.2 地级市字段匹配的类
-    该类实现用地址分词字符串匹配行政区划字典，并返回地级市名的功能。为了减少误差，这里使用jieba库的精确模式对地址信息进行分词。
-
+>该类实现用地址分词字符串匹配行政区划字典，并返回地级市名的功能。为了减少误差，这里使用jieba库的精确模式对地址信息进行分词。
 >注：首先匹配市级单位，没有市级单位再匹配县级单位，通过县级单位查出对应的市级单位。
 ```
 import sql
@@ -158,8 +158,7 @@ def address_match(address):
     return address_item
 ```
 ##### 	3.3 执行脚本
-
-                写一个执行文件，传入实参执行上面两个工具类，并更新数据库字段值
+>写一个执行文件，传入实参执行上面两个工具类，并更新数据库字段值
 ```
 import sql
 import address
