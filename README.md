@@ -180,11 +180,11 @@ for row in ad:
 #### 	4、运行结果
   
 >最后，提取不规则地址中的地级行政区结果如下：  
-  
 >原地址字段值：  
     
 ![image](https://user-images.githubusercontent.com/48922159/170210467-84407658-6ec4-4e05-99e0-edfc3edc3728.png)  
-    处理后的：  
+>处理后的：  
+    
 ![image](https://user-images.githubusercontent.com/48922159/170210638-2eb9164e-5da0-4d10-a3a8-12619b50537d.png)  
 ### 四、存在的问题
 
