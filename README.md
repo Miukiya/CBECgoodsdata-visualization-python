@@ -22,21 +22,21 @@
 #### 	1、导入全国行政区域字典数据  
 
 ​		从国家民政部官网中将国家行政区划数据导入excel，按省、市、区录入  
-![image](https://user-images.githubusercontent.com/48922159/170196204-a25a4195-1f58-4f9f-a50a-050cacd83605.png)
+![image](https://user-images.githubusercontent.com/48922159/170196204-a25a4195-1f58-4f9f-a50a-050cacd83605.png)  
 ​		再将excel表导入数据库  
 
-![image](https://user-images.githubusercontent.com/48922159/170196398-28839423-67cb-4e7b-8bde-b456b1daff3d.png)
-![image](https://user-images.githubusercontent.com/48922159/170196456-d5093274-7dde-4ccf-8825-ebcd6df2bf1f.png)
+![image](https://user-images.githubusercontent.com/48922159/170196398-28839423-67cb-4e7b-8bde-b456b1daff3d.png)  
+![image](https://user-images.githubusercontent.com/48922159/170196456-d5093274-7dde-4ccf-8825-ebcd6df2bf1f.png)  
 
 ​		基于china_ad_division表整理出市级字典、县级字典  
-![image](https://user-images.githubusercontent.com/48922159/170196536-d80ff403-cada-46a1-b40a-8687b17cd3c7.png)
+![image](https://user-images.githubusercontent.com/48922159/170196536-d80ff403-cada-46a1-b40a-8687b17cd3c7.png)  
 #### 	2、相关库准备  
 
 ##### 	2.1 下载jieba分词库  
-![image](https://user-images.githubusercontent.com/48922159/170197605-e748870f-b791-416d-9b98-7b60717fe06a.png)
+![image](https://user-images.githubusercontent.com/48922159/170197605-e748870f-b791-416d-9b98-7b60717fe06a.png)  
 ##### 	2.2 配置mysql  
 ​		安装MySQLdb，我的Python版本是3.10，所以mysqlclient是2.1.0版本  
-![image](https://user-images.githubusercontent.com/48922159/170197815-c286036c-e0c6-4344-96bb-a70b79aa22d1.png)
+![image](https://user-images.githubusercontent.com/48922159/170197815-c286036c-e0c6-4344-96bb-a70b79aa22d1.png)  
 #### 	3、编写Python脚本  
 
 ##### 	3.1 sql工具类  
@@ -184,15 +184,15 @@ for row in ad:
 ​		最后，提取不规则地址中的地级行政区结果如下：  
 
 ​		原地址字段值：  
-![image](https://user-images.githubusercontent.com/48922159/170210467-84407658-6ec4-4e05-99e0-edfc3edc3728.png)
+![image](https://user-images.githubusercontent.com/48922159/170210467-84407658-6ec4-4e05-99e0-edfc3edc3728.png)  
 ​		处理后的：  
-![image](https://user-images.githubusercontent.com/48922159/170210638-2eb9164e-5da0-4d10-a3a8-12619b50537d.png)
+![image](https://user-images.githubusercontent.com/48922159/170210638-2eb9164e-5da0-4d10-a3a8-12619b50537d.png)  
 ### 四、存在的问题
 
 ​		该办法只能提取地址顺序相对较整齐的字段，如按省-市-区-街道/小区、市-区-街道/小区或区/县-街道/小区这种的，不能提取个别只填了街道或小区的字段，且街道或小区名称可能和字典里的区、市名重复，提取结果存在误差，如下例：  
-![image](https://user-images.githubusercontent.com/48922159/170211310-8ca9d7e7-9185-48b1-b21d-a8c1d089f85d.png)
+![image](https://user-images.githubusercontent.com/48922159/170211310-8ca9d7e7-9185-48b1-b21d-a8c1d089f85d.png)  
 ​		第一条里的“水城印象小区”实际位置在成都市金堂县，然而经过市级筛查没有匹配到“成都”关键字，进入县级筛查后字符串“水城”与六盘水市辖区下的“水城区”匹配上了，如下图，反馈结果就不正确：  
-![image](https://user-images.githubusercontent.com/48922159/170211427-e15d993c-a68b-451c-b2c2-a07b88936981.png)
+![image](https://user-images.githubusercontent.com/48922159/170211427-e15d993c-a68b-451c-b2c2-a07b88936981.png)  
 ​		而第二条和第三条由于先捕获到了市级关键字就没有再匹配到“水城”，第四条同样实际位置在成都市，但由于“龙泉”匹配上了丽水市辖区下的“龙泉市”，系统就报出了错误的结果。  
 ​		由于各地级市包含的小区、街道过多，且名称不具有唯一性，目前系统难以实现精确到各个社区的筛查，所以，通过这个方法确定清单收货地址，再计算出各市区消费清单的总量就存在一定误差，但数据库里主要的不规则地址还是遵循市-区/县-街道的顺序存入的，能够提取出有效的地级市字符串，上述情况再加上查不出来的单街道、小区地址大约不超过总量的2%（基于无效地址数量粗略估计），因此它在总体呈现各地物流单量多少的分布上还是有意义的。  
-![image](https://user-images.githubusercontent.com/48922159/170212273-f57d7fc9-260e-449f-b67c-7aa0e192621f.png)
+![image](https://user-images.githubusercontent.com/48922159/170212273-f57d7fc9-260e-449f-b67c-7aa0e192621f.png)  
