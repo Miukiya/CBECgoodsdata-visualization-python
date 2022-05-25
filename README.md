@@ -20,14 +20,14 @@
 >从国家民政部官网中能够查到国内最新的省市区县数据，将这些数据拷贝到excel 中，并插入数据库；然后导入 jieba 分词库来对地址字符串做分词；最后编写Python 脚本将所有的关键词依次同（省）市、县两级数据进行比较和匹配，提取地级行政区。  
 ### 三、方法步骤
 #### 	1、导入全国行政区域字典数据  
-        从国家民政部官网中将国家行政区划数据导入excel，按省、市、区录入  
+                从国家民政部官网中将国家行政区划数据导入excel，按省、市、区录入  
 ![image](https://user-images.githubusercontent.com/48922159/170196204-a25a4195-1f58-4f9f-a50a-050cacd83605.png)  
-再将excel表导入数据库  
+                再将excel表导入数据库  
 
 ![image](https://user-images.githubusercontent.com/48922159/170196398-28839423-67cb-4e7b-8bde-b456b1daff3d.png)  
 ![image](https://user-images.githubusercontent.com/48922159/170196456-d5093274-7dde-4ccf-8825-ebcd6df2bf1f.png)  
 
-基于china_ad_division表整理出市级字典、县级字典  
+                基于china_ad_division表整理出市级字典、县级字典  
 ![image](https://user-images.githubusercontent.com/48922159/170196536-d80ff403-cada-46a1-b40a-8687b17cd3c7.png)  
 #### 	2、相关库准备  
 
@@ -104,12 +104,9 @@ class Mysqldb(object):
 myOperationdb = Mysqldb()
 ```
 ##### 	3.2 地级市字段匹配的类
+                该类实现用地址分词字符串匹配行政区划字典，并返回地级市名的功能。为了减少误差，这里使用jieba库的精确模式对地址信息进行分词。
 
-​		该类实现用地址分词字符串匹配行政区划字典，并返回地级市名的功能。
-
-​		为了减少误差，这里使用jieba库的精确模式对地址信息进行分词。
-
-注：首先匹配市级单位，没有市级单位再匹配县级单位，通过县级单位查出对应的市级单位。
+>注：首先匹配市级单位，没有市级单位再匹配县级单位，通过县级单位查出对应的市级单位。
 ```
 import sql
 import jieba
@@ -162,7 +159,7 @@ def address_match(address):
 ```
 ##### 	3.3 执行脚本
 
-​		写一个执行文件，传入实参执行上面两个工具类，并更新数据库字段值
+                写一个执行文件，传入实参执行上面两个工具类，并更新数据库字段值
 ```
 import sql
 import address
@@ -180,11 +177,11 @@ for row in ad:
 ```
 #### 	4、运行结果
 
-​		最后，提取不规则地址中的地级行政区结果如下：  
+                最后，提取不规则地址中的地级行政区结果如下：  
 
-​		原地址字段值：  
+                原地址字段值：  
 ![image](https://user-images.githubusercontent.com/48922159/170210467-84407658-6ec4-4e05-99e0-edfc3edc3728.png)  
-​		处理后的：  
+                处理后的：  
 ![image](https://user-images.githubusercontent.com/48922159/170210638-2eb9164e-5da0-4d10-a3a8-12619b50537d.png)  
 ### 四、存在的问题
 
