@@ -23,3 +23,8 @@
 
 ​		从国家民政部官网中将国家行政区划数据导入excel，按省、市、区录入
 ![image](https://user-images.githubusercontent.com/48922159/170196204-a25a4195-1f58-4f9f-a50a-050cacd83605.png)
+​		再将excel表导入数据库
+![image](https://user-images.githubusercontent.com/48922159/170196398-28839423-67cb-4e7b-8bde-b456b1daff3d.png)
+![image](https://user-images.githubusercontent.com/48922159/170196456-d5093274-7dde-4ccf-8825-ebcd6df2bf1f.png)
+​		基于china_ad_division表整理出市级字典、县级字典
+![image](https://user-images.githubusercontent.com/48922159/170196536-d80ff403-cada-46a1-b40a-8687b17cd3c7.png)
